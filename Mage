@@ -1,0 +1,20 @@
+package lerin;
+class Mage extends GameCharacter {
+
+    public Mage(String name) {
+        super(name, 100, 20);
+    }
+
+    @Override
+    public int specialMove() {
+    	System.out.println(name + " casts a fireball!");
+    	return 25;
+    }
+    
+    @Override
+    public int secretPower() {
+    	System.out.println(name + " uses Lightning Storm!");
+    	return 35;
+    }
+
+}
