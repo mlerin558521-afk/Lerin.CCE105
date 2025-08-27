@@ -1,0 +1,57 @@
+package lerin;
+import javax.swing.JOptionPane;
+
+public class Main {
+
+    public static void main(String[] args) {
+        String mageName = JOptionPane.showInputDialog("Enter Mage's name:");
+        String warriorName = JOptionPane.showInputDialog("Enter Warrior's name:");
+
+
+        GameCharacter mage = new Mage(mageName);
+        GameCharacter warrior = new Warrior(warriorName);
+
+        JOptionPane.showMessageDialog(null, "Game starts! Both have 100 HP.");
+
+        boolean mageTurn = true;
+        while (mage.isAlive() && warrior.isAlive()) {
+
+            GameCharacter current = mageTurn ? mage : warrior;
+            GameCharacter opponent = mageTurn ? warrior : mage;
+            String choice = JOptionPane.showInputDialog(current.getName() + "'s turn!\nChoose move:\n1. Attack\n2. Special Move\n3. Secret Power");
+
+            int damage = 0;
+            String action = "";
+
+            switch (choice) {
+                case "1":
+                    damage = current.attack();
+                    action = "attacks";
+                    break;
+                case "2":
+                    damage = current.specialMove();
+                    action = "uses Special Move";
+                    break;
+                case "3":
+                    damage = current.secretPower();
+                    action = "unleashes Secret Power";
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "Invalid choice! Default attack used.");
+                    damage = current.attack();
+                    action = "attacks";
+            }
+
+            opponent.takeDamage(damage);
+            JOptionPane.showMessageDialog(null, current.getName() + " " + action + "! (" + damage + " damage)\n\n" + "HP Status:\n" + mage.getStatus() + "\n" + warrior.getStatus());
+            
+            mageTurn = !mageTurn;
+
+        }
+
+        String winner = mage.isAlive() ? mage.getName() : warrior.getName();
+        JOptionPane.showMessageDialog(null, winner + " wins the battle!");
+
+    }
+
+}
