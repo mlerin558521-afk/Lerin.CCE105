@@ -1,0 +1,20 @@
+package lerin;
+class Warrior extends GameCharacter {
+
+    public Warrior(String name) {
+        super(name, 100, 15); // HP = 100, normal attack = 15
+    }
+
+    @Override
+    public int specialMove() {
+    	System.out.println(name + " swings a mighty sword!");
+    	return 20;
+    }
+
+    @Override
+    public int secretPower() {
+    	System.out.println(name + " uses Shield Bash!");
+    	return 30;
+    }
+
+}
